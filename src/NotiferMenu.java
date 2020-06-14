@@ -260,7 +260,7 @@ public class NotiferMenu {
 		
 		JLabel lblSearchRate = new JLabel("Refresh Rate:");
 		lblSearchRate.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblSearchRate.setBounds(10, 114, 72, 15);
+		lblSearchRate.setBounds(10, 114, 88, 15);
 		panel.add(lblSearchRate);
 		
 		JLabel lblRefreshSettings = new JLabel("Refreshing");
@@ -528,7 +528,7 @@ public class NotiferMenu {
 		
 		JLabel lbl_loading = new JLabel("Loading...");
 		lbl_loading.setFont(new Font("Arial", Font.PLAIN, 24));
-		lbl_loading.setBounds(90, 112, 106, 28);
+		lbl_loading.setBounds(90, 112, 132, 28);
 		latestjob_panel.add(lbl_loading);
 		
 		Timer initial_timer = new Timer(25, new ActionListener(){
