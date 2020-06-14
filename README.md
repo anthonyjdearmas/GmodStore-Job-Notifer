@@ -8,7 +8,7 @@ This program was created to allow freelance GLUA developers to know about newly 
 The program works by doing something called 'web-scraping'. Basically, it grabs the HTML of given web pages and parses through it for desired information. The web-scraping library used to power this program is called [JSoup](https://jsoup.org/apidocs/).
 
 # How do I run It
-The easiest way to run the program is to simply double click on the .exe file found within the zip file. Just extract the the .exe file to your desired location and run it. It's that easy! You can delete the other files if you would like to. They are just if you would like to take a look at the source code or modify the program yourself.
+The easiest way to run the program is to simply double click on the .exe file found within the zip file. Just extract the the .exe file to your desired location and run it. It's that easy! You can delete the other files if you would like to. They are just there if you would like to take a look at the source code or modify the program yourself.
 
 
 # Primary features
