@@ -42,5 +42,5 @@ The easiest way to run the program is to simply double click on the .exe file fo
 <br> 
 **Question:** I see that GmodStore has its own API, why not use that to grab the information instead of web-scraping?
 <br> 
-**Answer:** This would be a fantastic idea, however GmodStore's API does not have anything for getting information about job postings. For this reason, the API would be useless and web-scraping is needed.
+**Answer:** This is a fantastic idea, however GmodStore's API does not have anything for getting information about job postings. For this reason, the API cannot be used and web-scraping is needed.
 
