@@ -29,7 +29,9 @@ import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
@@ -202,6 +204,7 @@ public class NotiferMenu {
 		frame.getContentPane().add(logosep);
 		
 		JPanel panel = new JPanel();
+		panel.setToolTipText("Go to the github to see the source code and credits!");
 		panel.setBackground(SystemColor.inactiveCaptionBorder);
 		panel.setBorder(new LineBorder(new Color(153, 180, 209), 2, true));
 		panel.setBounds(10, 155, 125, 480);
@@ -319,18 +322,29 @@ public class NotiferMenu {
 		panel.add(enbl_logactions);
 		app_enbl_actionlog = enbl_logactions;
 		
-		JLabel lblCredits = new JLabel("Credits");
-		lblCredits.setToolTipText("Created by Anthony DeArmas");
-		lblCredits.setBackground(SystemColor.inactiveCaption);
-		lblCredits.setFont(new Font("Arial", Font.BOLD | Font.ITALIC, 15));
-		lblCredits.setBounds(35, 452, 53, 18);
-		panel.add(lblCredits);
-		
 		JSeparator credits_sep = new JSeparator();
 		credits_sep.setForeground(SystemColor.activeCaption);
 		credits_sep.setBackground(SystemColor.activeCaption);
-		credits_sep.setBounds(2, 440, 121, 2);
+		credits_sep.setBounds(2, 400, 121, 2);
 		panel.add(credits_sep);
+		
+		JButton btn_gotogit = new JButton("");
+		btn_gotogit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					Desktop.getDesktop().browse(new URI("https://github.com/anthonyjdearmas/GmodStore-Job-Notifer"));
+				} catch (IOException e1) {
+					e1.printStackTrace();
+				} catch (URISyntaxException e1) {
+					e1.printStackTrace();
+				}
+			}
+		});
+		btn_gotogit.setToolTipText("Go to GitHub to see source code and more");
+		btn_gotogit.setIcon(new ImageIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/icon_git.png")).getImage().getScaledInstance(35, 35, Image.SCALE_SMOOTH)));
+		btn_gotogit.setBounds(25, 421, 72, 49);
+		btn_gotogit.setBackground(SystemColor.inactiveCaptionBorder);
+		panel.add(btn_gotogit);
 		
 		JPanel main_panel = new JPanel();
 		main_panel.setBorder(new LineBorder(SystemColor.activeCaption, 2, true));
@@ -430,6 +444,11 @@ public class NotiferMenu {
 		app_lbl_status = lbl_status;
 		
 		JButton btnManualRefresh = new JButton("Manual Refresh");
+		btnManualRefresh.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ManualRefresh();
+			}
+		});
 		btnManualRefresh.setBounds(706, 109, 153, 21);
 		btnManualRefresh.setVisible(false);
 		main_panel.add(btnManualRefresh);
@@ -751,8 +770,51 @@ public class NotiferMenu {
 			String time = "" + java.time.LocalTime.now();
 			String console_time = " <" + time.substring(0, 5) + "> ";
 			app_log_obj.append(console_time + msg + "\n");
-		}	
+		}
 		
+		/** Creates a pop up window and plays a beep sound depending on OS.
+		 *  This is called when a change in the latest job ID has been detected.*/
+		private void load_NewJobPopup() {
+			Image icon = Toolkit.getDefaultToolkit().getImage("src\\Images/icon.png");
+		    Toolkit.getDefaultToolkit().beep();
+		    JOptionPane newjob_notif = new JOptionPane("Latest job has been detected!", JOptionPane.INFORMATION_MESSAGE);
+		    JDialog newjob_notif_msg = newjob_notif.createDialog("GmodStore Job Notification");
+		    newjob_notif_msg.setIconImage(icon);
+		    newjob_notif_msg.setAlwaysOnTop(true);
+		    newjob_notif_msg.setVisible(true);
+		}
+		
+		/** Checks if a change in the latest job has been detected and if so
+		 *  will notify the user via pop up window.*/
+		private void ManualRefresh() {
+			if (app_enbl_refreshlog.isSelected()) log("Checking for new job listing...");
+			if (app_last_latestid != app_w.getLatestID()) {
+				if (app_enbl_alerts.isSelected()) {
+					load_NewJobPopup();
+				}
+				
+				log("Latest job has been detected!");
+				log("Refreshing jobs...");
+				app_isRefreshing = true;
+				app_listingspanel.removeAll();
+				app_listingspanel.revalidate();
+				app_listingspanel.repaint();
+				
+				app_latestpanel.removeAll();
+				app_latestpanel.revalidate();
+				app_latestpanel.repaint();
+				load_PrimaryJobsInfo(app_latestpanel, app_listingspanel, app_w);
+				app_isRefreshing = false;
+			} else {
+				if (app_enbl_refreshlog.isSelected()) log("No latest job changed detected...");
+			}
+		}
+		
+		/** Checks if a new job exists automatically.<br>
+		 * 	Additional notes:<br>
+		 *  - Refresh time depends on the user's input of refresh_timer (default is 60 seconds)<br>
+		 *  - Timer is active even if auto refresh setting is off to check settings (like manual refresh settings)<br>
+		 *  - Only refreshes jobs when current latestjob ID does not match the latestjob ID on the GmodStore<br>*/
 		private void AutoRefresh() {
 			Timer barprogress_timer = new Timer(1000, new ActionListener(){
 			int  counter = 0;
@@ -773,22 +835,13 @@ public class NotiferMenu {
 					manual_refresh_isvalid = false;
 				}
 				
-
-
-					
 					if (!app_isRefreshing && (app_status == "RUN")) {
 						if ((counter) >= refresh_timer) {
 								if (app_enbl_refreshlog.isSelected()) log("Checking for new job listing...");
 									
 								if (app_last_latestid != app_w.getLatestID()) {
 									if (app_enbl_alerts.isSelected()) {
-										Image icon = Toolkit.getDefaultToolkit().getImage("src\\Images/icon.png");
-									    Toolkit.getDefaultToolkit().beep();
-									    JOptionPane newjob_notif = new JOptionPane("Latest job has been detected!", JOptionPane.INFORMATION_MESSAGE);
-									    JDialog newjob_notif_msg = newjob_notif.createDialog("GmodStore Job Notification");
-									    newjob_notif_msg.setIconImage(icon);
-									    newjob_notif_msg.setAlwaysOnTop(true);
-									    newjob_notif_msg.setVisible(true);
+										load_NewJobPopup();
 									}
 									
 									log("Latest job has been detected!");
