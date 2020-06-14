@@ -4,14 +4,14 @@
 # What do I use this for?
 This program was created to allow freelance GLUA developers to know about newly created jobs on the GmodStore market place without having to manually refresh the page every ten minutes. The major advantage of using this program is that you will know about jobs before any other developers apply for the newly posted job!
 
-# How does it work?
+# How do I run it?
 The program works by doing something called 'web-scraping'. Basically, it grabs the HTML of given web pages and parses through it for desired information. The web-scraping library used to power this program is called [JSoup](https://jsoup.org/apidocs/).
 
-# How do I run It
+# How do I run It?
 The easiest way to run the program is to simply double click on the .exe file found within the zip file. Just extract the the .exe file to your desired location and run it. It's that easy! You can delete the other files if you would like to. They are just there if you would like to take a look at the source code or modify the program yourself.
 
 
-# Primary features
+# What does it feature?
 
  - Super easy-to-use and intuitive interface that allows you to visit jobs on the fly
  - Manual action buttons that allow you to start, stop or pause the program
