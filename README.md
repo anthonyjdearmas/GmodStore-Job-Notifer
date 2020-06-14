@@ -15,10 +15,10 @@ The easiest way to run the program is to simply double click on the .exe file fo
 
  - Super easy-to-use and intuitive interface that allows you to visit jobs on the fly
  - Manual action buttons that allow you to start, stop or pause the program
- - Various settings that can changed as the program runs
-		 - Refresh settings
-		 - Notification settings
-		 - Log settings
+ - Various settings that can changed as the program runs<br>
+&nbsp;- Refresh settings<br>
+&nbsp;- Notification settings<br>
+&nbsp;- Log settings<br>
  - Console log that allows you to see anything that you missed when not looking at the program
  - A progress bar that displays exact time until next refresh
  - Helpful tool tips that help display important info like instructions or longer text
