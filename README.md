@@ -25,14 +25,22 @@ The easiest way to run the program is to simply double click on the .exe file fo
 
 
 # Frequently asked questions
-**Question:** When I double click on the program, I get an error saying *"A JNI error has occurred please check your installation and try again."* 
+**Question:** When I double click on the program, I get an error saying *"A JNI error has occurred please check your installation and try again."*
+<br> 
 **Answer:** This error can be the result of various things. However, the most common reason for this is that your computer is trying to run the program with two different versions/types of java. The program is designed to run on either Java's JDK *OR* JRE. Try uninstalling the JRE and run the program again.
-
+<br> 
+<br> 
 **Question:** Why does it take so long to load new jobs?
+<br> 
 **Answer:** The program's speed is heavily dependent upon your internet connection speed. If your internet is slow then the program will be slow too!
-
+<br> 
+<br> 
 **Question:** How can I see more than 7 jobs?
+<br> 
 **Answer:** The program was designed to only show the latest jobs. The 8th job and so on are not that recent and not considered to be the latest job listings. On average, there are only 3-5 new job postings a day on the market.
-
+<br> 
+<br> 
 **Question:** I see that GmodStore has its own API, why not use that to grab the information instead of web-scraping?
+<br> 
 **Answer:** This would be a fantastic idea, however GmodStore's API does not have anything for getting information about job postings. For this reason, the API would be useless and web-scraping is needed.
+
