@@ -2,7 +2,7 @@
 
 
 # What do I use this for?
-This program was created to allow freelance GLUA developers to know about newly created jobs on the GmodStore market place without having to manually refresh the page every ten minutes. The major advantage of using this program is that you will know about jobs before any other developers apply for the newly posted job!
+This program was created to allow freelance GLua developers to know about newly created jobs on the GmodStore market place without having to manually refresh the page every ten minutes. The major advantage of using this program is that you will know about jobs before any other developers apply for the newly posted job!
 
 # How do I run it?
 The program works by doing something called 'web-scraping'. Basically, it grabs the HTML of given web pages and parses through it for desired information. The web-scraping library used to power this program is called [JSoup](https://jsoup.org/apidocs/).
